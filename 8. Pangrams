@@ -1,0 +1,75 @@
+// A pangram is a string that contains every letter of the alphabet. Given a sentence determine whether it is a pangram in the English alphabet. Ignore case. Return either pangram or not pangram as appropriate.
+// Sample Input:
+// s="The quick brown fox jumps over the lazy dog"
+//Output: pangrams
+
+//Code:
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'pangrams' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts STRING s as parameter.
+     */
+
+    public static String pangrams(String s) {
+    // Write your code here
+    String S=s.toLowerCase();
+    char a[]=new char[30];
+    int i=0;
+    for (char c='a';c<='z';c++){
+        a[i]=c;
+        i++;
+    }
+    for(int m=0;m<S.length();m++){
+        char c = S.charAt(m);
+        for(int n=0;n<26;n++){
+            if(c==a[n]){
+                a[n]='0';
+            }
+        }
+    }
+    boolean res=true;
+    for(int p=0;p<26;p++){
+        if(a[p]!='0'){
+            res=false;
+        }
+    }
+    if(res==true){
+        return "pangram";
+    }else{
+        return "not pangram";
+    }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        String result = Result.pangrams(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
